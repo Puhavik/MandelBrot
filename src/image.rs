@@ -1,12 +1,12 @@
 #[derive(Debug, Copy, Clone, PartialEq)]
 pub struct Pixel {
-    pub r: u8,
-    pub g: u8,
-    pub b: u8,
+    pub r: usize,
+    pub g: usize,
+    pub b: usize,
 }
 
 impl Pixel {
-    pub fn new(r: u8, g: u8, b: u8) -> Self {
+    pub fn new(r: usize, g: usize, b: usize) -> Self {
         Pixel { r, g, b }
     }
 }

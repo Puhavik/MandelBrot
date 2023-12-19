@@ -6,10 +6,11 @@ use crate::image::Image; // use from another module
 use std::env;
 use std::process;
 
-pub fn parse_args() -> Result<(usize, usize, usize), ParseIntError> {
+pub fn parse_args() -> Result<(usize, usize, usize, usize), ParseIntError> {
     let args: Vec<String> = env::args().collect();
 
-    if args.len() != 4 {
+    if args.len() != 5 {
+        println!("{}", args[1]);
         println!("Usage: {} <width> <height> <max_iterations>", args[0]);
         process::exit(1);
     }
@@ -17,8 +18,8 @@ pub fn parse_args() -> Result<(usize, usize, usize), ParseIntError> {
     let width = args[1].parse()?;
     let height = args[2].parse()?;
     let max_iterations = args[3].parse().unwrap_or(1024);
-
-    Ok((width, height, max_iterations))
+    let color = args[4].parse().unwrap_or(255);
+    Ok((width, height, max_iterations, color))
 }
 
 
