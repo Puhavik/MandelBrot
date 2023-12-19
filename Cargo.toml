@@ -7,3 +7,5 @@ edition = "2021"
 
 [dependencies]
 image = { version = "0.24.7", features = [] }
+url = "2.2.2"
+httparse = "1.4.1"
