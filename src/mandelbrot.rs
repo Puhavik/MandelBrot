@@ -22,7 +22,7 @@ pub fn generate_image(width: usize, height: usize, max_iterations: usize, color:
 
     for y in 0..height {
         for x in 0..width {
-            let cx = (x as f64 / width as f64 - 0.75) * 3.1;
+            let cx = (x as f64 / width as f64 - 0.75) * 3.5;
             let cy = (y as f64 / height as f64 - 0.5) * 2.0;
             let c = Complex { re: cx , im: cy };
 
