@@ -99,7 +99,7 @@ mod tests {
 
     #[test]
     fn mandelbrot_generate_and_test_pixel_count_v1() {
-        let image = mandelbrot::generate_image(525, 300, 1024);
+        let image = mandelbrot::generate_image(525, 300, 1024, 0);
 
         let pixels_in_the_set = image.get_mandelbrot_pixels();
         println!("Pixels in the set: {}", pixels_in_the_set);
@@ -111,7 +111,7 @@ mod tests {
 
     #[test]
     fn mandelbrot_generate_and_test_pixel_count_v2() {
-        let image = mandelbrot::generate_image(300, 525, 1024);
+        let image = mandelbrot::generate_image(300, 525, 1024, 0);
 
         let pixels_in_the_set = image.get_mandelbrot_pixels();
         println!("Pixels in the set: {}", pixels_in_the_set);
