@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rust</title>
+    <style>
+      body {
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        font-family: sans-serif;
+        margin-top: 10vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      h1 {
+        font-size: 3rem;
+        color: wheat;
+      }
+      h2 {
+        font-size: 2rem;
+      }
+      input {
+        font-size: 1.5rem;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        border: none;
+        background-color: #ecf0f1;
+        color: #2c3e50;
+        margin: 0.5rem;
+        display: flex;
+        width: 20rem; /* Updated width */
+      }
+      button[type="submit"] {
+        background-color: #27ae60;
+        color: #ecf0f1;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 0.5rem;
+        border: none;
+        padding: 0.5rem;
+        font-size: 1.5rem;
+        margin: 0.5rem;
+
+      }
+      input[type="submit"]:hover {
+        background-color: #2ecc71;
+      }
+
+      label {
+        font-size: 1.5rem;
+      }
+
+      @media (max-width: 768px) {
+        input[type="text"] {
+          width: 5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        input[type="text"] {
+          width: 3rem;
+        }
+        h1 {
+          font-size: 2rem;
+        }
+        h2 {
+          font-size: 1.5rem;
+        }
+        input {
+          font-size: 1rem;
+          padding: 0.25rem;
+        }
+        label {
+          font-size: 1rem;
+        }
+      }
+
+      @media (max-width: 320px) {
+        input[type="text"] {
+          width: 2rem;
+        }
+        h1 {
+          font-size: 1.5rem;
+        }
+        h2 {
+          font-size: 1rem;
+        }
+        input {
+          font-size: 0.75rem;
+          padding: 0.25rem;
+        }
+        label {
+          font-size: 0.75rem;
+        }
+      }
+
+      @media (max-width: 280px) {
+        input[type="text"] {
+          width: 1.5rem;
+        }
+        h1 {
+          font-size: 1rem;
+        }
+        h2 {
+          font-size: 0.75rem;
+        }
+        input {
+          font-size: 0.5rem;
+          padding: 0.25rem;
+        }
+        label {
+          font-size: 0.5rem;
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1>MANDELBROT</h1>
+    <h2>Here you can generate some fractals</h2>
+    <form id="form">
+      <label for="width">Width: </label>
+      <input required type="number" name="width" id="Width" placeholder="Enter image width in px"/>
+      <br />
+      <label for="Height">Height: </label>
+      <input required type="number" name="height" id="Height" placeholder="Enter image height in px" />
+      <label for="iterations">Iterations: </label>
+      <input required type="number" name="iterations" id="iterations" placeholder="Enter iterations quantity" />
+      <br />
+      <label for="color">Color: </label>
+      <input required type="number" name="color" id="color" placeholder="Enter color tone (0-225)"/>
+
+      <br />
+
+      <button type="submit" >Generate</button>
+      <div class="images">
+
+      </div>
+  </body>
+
+  <script>
+    const imgContainer = document.querySelector(".images")
+    form.addEventListener("submit",(e)=>{
+      e.preventDefault();
+      let width = e.target.elements.width.value;
+      let height = e.target.elements.height.value;
+      let iterations = e.target.elements.iterations.value;
+      let color = e.target.elements.color.value;
+      let url = `http://localhost:7878/?width=${width}&height=${height}&iterations=${iterations}&color=${color}`;
+      fetch(url)
+        .then((res) => res.blob())
+        .then((blob) => {
+          let url = URL.createObjectURL(blob);
+          let a = document.createElement("a");
+          a.href = url;
+          a.download = "mandelbrot.png";
+          a.click();
+
+        }).catch((err)=>{
+          alert("Something went wrong")
+        }).finally(()=>{
+          document.body.removeChild(loader)
+          form.style.display = "block"
+        })
+        form.style.display = "none"
+        const loader = document.createElement("div")
+        loader.style.fontSize = "2rem"
+        loader.innerHTML = "Loading..."
+        document.body.appendChild(loader)
+
+
+    })
+  </script>
+</html>
